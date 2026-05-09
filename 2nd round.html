@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Varakari Sant Round</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .background-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.08;
+      background-image: radial-gradient(circle at 2px 2px, #8b4513 2px, transparent 0);
+      background-size: 40px 40px;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      padding: 60px 40px;
+      border-radius: 30px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      width: 90%;
+      max-width: 700px;
+    }
+
+    h1 {
+      font-size: 4rem;
+      color: #7b2d00;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      color: #5a2a00;
+      margin-bottom: 50px;
+      line-height: 1.6;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 18px 40px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-width: 220px;
+      color: white;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.25);
+      transition: 0.5s;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .spin-btn {
+      background: linear-gradient(135deg, #ff7b00, #ff4500);
+    }
+
+    .quiz-btn {
+      background: linear-gradient(135deg, #7b2ff7, #f107a3);
+    }
+
+    .btn:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .footer-text {
+      margin-top: 45px;
+      font-size: 1rem;
+      color: #6d3a10;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.6rem;
+      }
+
+      .container {
+        padding: 40px 25px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .button-container {
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background-pattern"></div>
+
+  <div class="container">
+    <h1>Varakari Sant Round</h1>
+
+    <p class="subtitle">
+      Explore the divine journey of the great Varakari saints through
+      exciting activities and devotional learning.
+    </p>
+
+    <div class="button-container">
+      <button class="btn spin-btn" onclick="openSpinWheel()">
+        🎡 Spin Wheel
+      </button>
+
+      <button class="btn quiz-btn" onclick="openQuiz()">
+        🧠 Quiz
+      </button>
+    </div>
+
+    <div class="footer-text">
+      Dnyanoba Mauli Tukaram ✨
+    </div>
+  </div>
+
+  <script>
+    function openSpinWheel() {
+      window.location.href = 'https://wheelofnames.com/';
+    }
+
+    function openQuiz() {
+      window.location.href = 'anna.html';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Varakari Saints Quiz Round</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#f5efe6;
+    overflow-x:hidden;
+}
+
+/* HEADER */
+
+header{
+    background:linear-gradient(90deg,#ff7a18,#ff4b2b);
+    color:white;
+    text-align:center;
+    padding:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.15);
+}
+
+header h1{
+    font-size:42px;
+    font-weight:700;
+}
+
+/* BUTTONS */
+
+.button-container{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:18px;
+    padding:30px 20px;
+}
+
+.saint-btn{
+    padding:14px 28px;
+    border:none;
+    border-radius:14px;
+    background:white;
+    color:#cc5200;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 8px 18px rgba(0,0,0,0.12);
+}
+
+.saint-btn:hover{
+    background:#ff7f00;
+    color:white;
+    transform:translateY(-4px);
+}
+
+/* MAIN */
+
+.main-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+/* FLOWCHART */
+
+.flowchart{
+    position:relative;
+    width:800px;
+    height:800px;
+}
+
+/* CENTER */
+
+.center-circle{
+    position:absolute;
+    width:270px;
+    height:290px;
+    background:white;
+    border-radius:50%;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    z-index:20;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+    border:12px solid rgba(255,255,255,0.7);
+}
+
+.center-circle img{
+    width:150px;
+    height:150px;
+    border-radius:20%;
+    object-fit:cover;
+    border:5px solid #ff7f00;
+    margin-bottom:14px;
+}
+
+.center-circle h2{
+    color:#cc5200;
+    font-size:26px;
+    line-height:1.3;
+}
+
+/* COMMON POINT */
+
+.point{
+    position:absolute;
+    width:230px;
+    height:230px;
+    border-radius:50%;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:28px;
+    cursor:pointer;
+    transition:0.3s;
+    z-index:10;
+    box-shadow:0 12px 25px rgba(0,0,0,0.18);
+}
+
+.point:hover{
+    transform:scale(1.05);
+}
+
+/* INNER CONTENT */
+
+.point-content h3{
+    font-size:26px;
+    margin-bottom:12px;
+}
+
+.point-content p{
+    font-size:17px;
+    line-height:1.5;
+    font-weight:500;
+}
+
+/* CONNECTORS */
+
+.connector{
+    position:absolute;
+    z-index:1;
+}
+
+/* TOP */
+
+.top{
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#f4511e;
+}
+
+.connector-top{
+    width:70px;
+    height:170px;
+    top:170px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#f4511e;
+    opacity:0.85;
+    border-radius:50px;
+}
+
+/* RIGHT */
+
+.right{
+    top:50%;
+    right:20px;
+    transform:translateY(-50%);
+    background:#ffa000;
+}
+
+.connector-right{
+    width:170px;
+    height:70px;
+    top:50%;
+    right:180px;
+    transform:translateY(-50%);
+    background:#ffa000;
+    opacity:0.85;
+    border-radius:50px;
+}
+
+/* BOTTOM RIGHT */
+
+.bottom-right{
+    bottom:40px;
+    right:110px;
+    background:#8bc34a;
+}
+
+.connector-bottom-right{
+    width:160px;
+    height:70px;
+    bottom:230px;
+    right:250px;
+    transform:rotate(45deg);
+    background:#8bc34a;
+    opacity:0.85;
+    border-radius:50px;
+}
+
+/* BOTTOM LEFT */
+
+.bottom-left{
+    bottom:40px;
+    left:110px;
+    background:#26c6da;
+}
+
+.connector-bottom-left{
+    width:160px;
+    height:70px;
+    bottom:230px;
+    left:250px;
+    transform:rotate(-45deg);
+    background:#26c6da;
+    opacity:0.85;
+    border-radius:50px;
+}
+
+/* LEFT */
+
+.left{
+    top:50%;
+    left:20px;
+    transform:translateY(-50%);
+    background:#00acc1;
+}
+
+.connector-left{
+    width:170px;
+    height:70px;
+    top:50%;
+    left:180px;
+    transform:translateY(-50%);
+    background:#00acc1;
+    opacity:0.85;
+    border-radius:50px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+.flowchart{
+    width:80%;
+    height:auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:25px;
+}
+
+.point,
+.center-circle{
+    position:relative;
+    top:auto !important;
+    bottom:auto !important;
+    left:auto !important;
+    right:auto !important;
+    transform:none !important;
+}
+
+.connector{
+    display:none;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>Varakari Saints Quiz Round</h1>
+</header>
+
+<!-- BUTTONS -->
+
+<div class="button-container">
+
+<button class="saint-btn" onclick="loadSaint('dnyaneshwar')">
+Dnyaneshwar Maharaj
+</button>
+
+<button class="saint-btn" onclick="loadSaint('namdev')">
+Namdev Maharaj
+</button>
+
+<button class="saint-btn" onclick="loadSaint('eknath')">
+Eknath Maharaj
+</button>
+
+<button class="saint-btn" onclick="loadSaint('tukaram')">
+Tukaram Maharaj
+</button>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main-container">
+
+<div class="flowchart">
+
+<!-- CONNECTORS -->
+
+<div class="connector connector-top"></div>
+<div class="connector connector-right"></div>
+<div class="connector connector-bottom-right"></div>
+<div class="connector connector-bottom-left"></div>
+<div class="connector connector-left"></div>
+
+<!-- CENTER -->
+
+<div class="center-circle">
+
+<img id="saintImage" src="" alt="Saint">
+
+<h2 id="saintName"></h2>
+
+</div>
+
+<!-- POINTS -->
+
+<div class="point top" onclick="toggleAnswer(this,0)">
+<div class="point-content">
+<h3 id="q0">Question</h3>
+<p>Click to Reveal</p>
+</div>
+</div>
+
+<div class="point right" onclick="toggleAnswer(this,1)">
+<div class="point-content">
+<h3 id="q1">Question</h3>
+<p>Click to Reveal</p>
+</div>
+</div>
+
+<div class="point bottom-right" onclick="toggleAnswer(this,2)">
+<div class="point-content">
+<h3 id="q2">Question</h3>
+<p>Click to Reveal</p>
+</div>
+</div>
+
+<div class="point bottom-left" onclick="toggleAnswer(this,3)">
+<div class="point-content">
+<h3 id="q3">Question</h3>
+<p>Click to Reveal</p>
+</div>
+</div>
+
+<div class="point left" onclick="toggleAnswer(this,4)">
+<div class="point-content">
+<h3 id="q4">Question</h3>
+<p>Click to Reveal</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* DATA */
+
+const saints = {
+
+dnyaneshwar:{
+
+name:"Dnyaneshwar Maharaj",
+
+image:"Dnyaneshwar.webp",
+
+questions:[
+"Parents",
+"Guru",
+"Granth",
+"Birthplace",
+"Role in Sampradaya temple"
+],
+
+answers:[
+
+"Vitthal Pant Kulkarni and Rukmini",
+
+"Nivruthinath Maharaj",
+
+"Dnyaneshwari and Amrutanubhav",
+
+"Alandi",
+
+"Foundation"
+
+]
+
+},
+
+namdev:{
+
+name:"Namdev Maharaj",
+
+image:"namdev1.jfif",
+
+questions:[
+"Parents",
+"Guru",
+"Fondly known as",
+"Birthplace",
+"Role in Sampradaya temple"
+],
+
+answers:[
+
+"Damu Shet and Gonabai",
+
+"Visoba Khechar",
+
+"Sant Shiromani",
+
+"Narasi",
+
+"Prakaara"
+
+]
+
+},
+
+eknath:{
+
+name:"Eknath Maharaj",
+
+image:"eknath1.jfif",
+
+questions:[
+"Parents",
+"Guru",
+"Granth",
+"Birthplace",
+"Role in sampradaya temple"
+],
+
+answers:[
+
+"Suryanarayan and Rukmini",
+
+"Janardhan Maharaj",
+
+"Eknathi Bhagavat, Bhavartha Ramayan",
+
+"Paithan",
+
+"Pillar"
+
+]
+
+},
+
+tukaram:{
+
+name:"Tukaram Maharaj",
+
+image:"tukaram.jpg",
+
+questions:[
+"Parents",
+"Guru",
+"Number of Abhangs in Gatha",
+"Birthplace",
+"Role in sampradaya temple"
+],
+
+answers:[
+
+"Bolhoba and Kanakai",
+
+"Babaji Maharaj",
+
+"4583 abhangs",
+
+"Dehu",
+
+"Pinnacle (Kalas)"
+
+]
+
+}
+
+};
+
+let currentSaint = saints.dnyaneshwar;
+
+/* LOAD SAINT */
+
+function loadSaint(key){
+
+currentSaint = saints[key];
+
+document.getElementById("saintImage").src =
+currentSaint.image;
+
+document.getElementById("saintName").innerText =
+currentSaint.name;
+
+/* CHANGE QUESTIONS */
+
+for(let i=0;i<5;i++){
+
+document.getElementById("q"+i).innerText =
+currentSaint.questions[i];
+
+}
+
+/* RESET ANSWERS */
+
+document.querySelectorAll(".point p")
+.forEach((p)=>{
+
+p.innerText = "Click to Reveal";
+
+});
+
+}
+
+/* TOGGLE ANSWER */
+
+function toggleAnswer(element,index){
+
+const text = element.querySelector("p");
+
+if(text.innerText === "Click to Reveal"){
+
+text.innerText = currentSaint.answers[index];
+
+}else{
+
+text.innerText = "Click to Reveal";
+
+}
+
+}
+
+/* INITIAL LOAD */
+
+loadSaint("dnyaneshwar");
+
+</script>
+
+</body>
+</html>

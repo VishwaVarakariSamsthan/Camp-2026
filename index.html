@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Varakari Sampradaya Quiz</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Creative spiritual background */
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+.container {
+    text-align: center;
+}
+
+/* Top heading section */
+.top-section {
+    margin-bottom: 25px;
+}
+
+.logo {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: white;
+    padding: 10px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+}
+
+.samsthan-title {
+    margin-top: 15px;
+    font-size: 38px;
+    color: white;
+    font-weight: bold;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.4);
+    letter-spacing: 2px;
+}
+
+h1 {
+    font-size: 60px;
+    color: white;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.4);
+    margin-bottom: 50px;
+}
+
+.button-container {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 20px 40px;
+    font-size: 22px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    background: white;
+    color: #333;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+    font-weight: bold;
+}
+
+button:hover {
+    transform: scale(1.1);
+    background: #ffeaa7;
+}
+
+/* Optional glowing effect */
+button:active {
+    transform: scale(0.95);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Top Section -->
+    <div class="top-section">
+
+        <!-- Replace logo.png with your logo file -->
+        <img src="logo.jpg.png" alt="Vishwa Varakari Samsthan Logo" class="logo">
+
+        <div class="samsthan-title">
+            VISHWA VARAKARI SAMSTHAN
+        </div>
+
+    </div>
+
+    <h1>VARAKARI SAMPRADAYA QUIZ</h1>
+
+    <div class="button-container">
+        <button onclick="goToPage('connect.html')">Connect</button>
+
+        <button onclick="goToPage('2nd round.html')">
+            Sant Samvad
+        </button>
+
+        <button onclick="goToPage('https://randomspinwheel.com/')">
+            Spin Wheel
+        </button>
+    </div>
+</div>
+
+<script>
+function goToPage(page) {
+    window.location.href = page;
+}
+</script>
+
+</body>
+</html>

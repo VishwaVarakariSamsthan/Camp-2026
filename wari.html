@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Wari yatra</title>
+
+<style>
+body {
+  text-align: center;
+  font-family: Arial;
+  background: #f5e6c8;
+}
+
+#map {
+  position: relative;
+  width: 900px;
+  height: 450px;
+  margin: auto;
+  background: #fff3d6;
+  border: 3px solid #444;
+}
+
+svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Place labels */
+.place {
+  position: absolute;
+  font-size: 14px;
+  font-weight: bold;
+  opacity: 0.3;
+  transition: 0.5s;
+}
+
+.active {
+  opacity: 1;
+  color: #d84315;
+}
+
+/* Players */
+.player {
+  position: absolute;
+  font-size: 26px;
+  transition: all 0.6s ease;
+}
+
+/* Team Colors */
+.Chatrasplayer { color: red; }
+.Vidhyarthisplayer { color: blue; }
+.Adhyayisplayer { color: green; }
+
+/* Bounce animation */
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  30% { transform: translateY(-10px); }
+  60% { transform: translateY(0); }
+}
+
+.bounce {
+  animation: bounce 0.5s;
+}
+
+/* Buttons */
+button {
+  margin: 10px;
+  padding: 12px 18px;
+  font-size: 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+}
+
+.Chatras { background: #e53935; }
+.Vidhyarthis { background: #1e88e5; }
+.Adhyayis { background: #43a047; }
+
+#status {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.Chatrasplayer { 
+  color: red; 
+  text-shadow: 0 0 8px red;
+}
+.Vidhyarthisplayer { 
+  color: blue; 
+  text-shadow: 0 0 8px blue;
+}
+.Adhyayisplayer { 
+  color: green; 
+  text-shadow: 0 0 8px green;
+}
+</style>
+</head>
+
+<body>
+
+<h2>🚩 Who reaches Pandari first? </h2>
+
+<div id="map">
+
+<!-- PATH -->
+<svg width="900" height="450">
+  <path 
+    d="M50,380 
+       Q200,250 350,200 
+       T650,220 
+       T850,80"
+    fill="none" 
+    stroke="#6d4c41" 
+    stroke-width="4"
+    stroke-dasharray="8,6"/>
+</svg>
+
+</div>
+
+<div>
+  <button class="Chatras" onclick="move('Chatras')">Chatras 👣</button>
+  <button class="Vidhyarthis" onclick="move('Vidhyarthis')">Vidhyarthis 👣</button>
+  <button class="Adhyayis" onclick="move('Adhyayis')">Adhyayis 👣</button>
+</div>
+
+<div id="status">Start the Wari!</div>
+
+<!-- Confetti Library -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+
+// 🔊 Sounds
+const moveSound = new Audio("WhatsApp Audio 2025-03-30 at 11.46.12 AM (1).mpeg (1)");
+const winSound = new Audio("https://www.soundjay.com/human/sounds/applause-8.mp3");
+
+// 📍 Places
+const places = [
+  {name: "Alandi", x:50, y:380},
+  {name: "Pune", x:150, y:320},
+  {name: "Saswad", x:250, y:250},
+  {name: "Jejuri", x:350, y:200},
+  {name: "Lonand", x:450, y:175},
+  {name: "Phaltan", x:550, y:180},
+  {name: "Malsiras", x:675, y:225},
+  {name: "Wakhri", x:800, y:210},
+  {name: "Pandharpur 🏁", x:850, y:50}
+];
+
+const map = document.getElementById("map");
+
+// Create labels
+let labels = [];
+places.forEach(p => {
+  let label = document.createElement("div");
+  label.className = "place";
+  label.innerText = p.name;
+  label.style.left = (p.x - 30) + "px";
+  label.style.top = (p.y + 10) + "px";
+  map.appendChild(label);
+  labels.push(label);
+});
+
+// Create player
+function createPlayer(icon, offset, teamClass) {
+  let p = document.createElement("div");
+  p.className = "player " + teamClass;
+  p.innerText = icon;
+  map.appendChild(p);
+  return { el: p, offset: offset };
+}
+
+// Teams
+const teams = {
+  Chatras: { index: 0, player: createPlayer("👣", -10, "Chatrasplayer") },
+  Vidhyarthis: { index: 0, player: createPlayer("👣", 10, "Vidhyarthisplayer") },
+  Adhyayis: { index: 0, player: createPlayer("👣", 30, "Adhyayisplayer") }
+};
+
+// 🎉 Confetti
+function launchConfetti() {
+  confetti({
+    particleCount: 150,
+    spread: 70,
+    origin: { y: 0.6 }
+  });
+}
+
+// 🚶 Move function
+function move(team) {
+  let t = teams[team];
+
+  if (t.index < places.length) {
+    let pos = places[t.index];
+
+    // Move player
+    t.player.el.style.left = pos.x + "px";
+    t.player.el.style.top = (pos.y + t.player.offset) + "px";
+
+    // Bounce
+    t.player.el.classList.add("bounce");
+    setTimeout(() => t.player.el.classList.remove("bounce"), 500);
+
+    // Sound
+    moveSound.currentTime = 3;
+    moveSound.play();
+
+    // Activate place
+    labels[t.index].classList.add("active");
+
+    document.getElementById("status").innerText =
+      "Team " + team + " reached " + pos.name;
+
+    t.index++;
+
+    // Winner
+    if (t.index === places.length) {
+      document.getElementById("status").innerText =
+        "🏆 Team " + team + " reached Pandharpur!";
+
+      winSound.play();
+      launchConfetti();
+    }
+  }
+}
+
+// Initial position
+for (let t in teams) {
+  move(t);
+}
+
+</script>
+
+</body>
+</html>

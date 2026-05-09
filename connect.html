@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Connect Round Quiz</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    text-align: center;
+}
+
+h1 {
+    margin-top: 20px;
+}
+
+#quiz-box {
+    margin: 30px auto;
+    padding: 20px;
+    width: 80%;
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.team {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #ffd700;
+}
+
+.round {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.images {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.images img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: none;
+    box-shadow: 0 0 10px black;
+}
+
+button {
+    margin: 10px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background: #ffd700;
+    color: black;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #ffcc00;
+}
+
+#answer {
+    margin-top: 20px;
+    font-size: 22px;
+    display: none;
+    color: #00ffcc;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>CONNECT ROUND</h1>
+
+<div id="quiz-box">
+    <div class="round" id="roundText">Round 1</div>
+    <div class="team" id="teamText">Team: Chatras</div>
+
+    <div class="images">
+        <img id="img0">
+        <img id="img1">
+        <img id="img2">
+        <img id="img3">
+        <img id="img4">
+    </div>
+
+    <br>
+
+    <button onclick="revealImage()">Reveal Next</button>
+    <button onclick="showAnswer()">Show Answer</button>
+    <button onclick="nextQuestion()">Next Question</button>
+
+    <div id="answer"></div>
+</div>
+
+<script>
+const teams = ["Chatras", "Vidhyarthis", "Adhyayis"];
+
+const questions = [
+    {
+        images: ["img1.jpg", "img2.jfif"],
+        answer: "Phalki"
+    },
+    {
+        images: ["img5.jpg", "img6.jpg"],
+        answer: "Haripat"
+    },
+    {
+        images: ["img9.jpg", "img10.jpg", "img11.png", "img12.jpg"],
+        answer: "Prasthanathrayam"
+    },
+    {
+        images: ["img13.jfif", "img14.jpeg", "img15.jfif"],
+        answer: "Varakari"
+    },
+    {
+        images: ["img17.jpg", "img18.jfif", "img19.jpg"],
+        answer: "Parayanam"
+    },
+    {
+        images: ["img21.jfif", "img22.jpg", "img23.jpg", "img24.png"],
+        answer: "Ashada ekadashi"
+    },
+    {
+        images: ["img25.jpg", "img43.jfif", "img27.jpg"],
+        answer: "Devathe santh"
+    },
+    {
+        images: ["img29.jfif", "img30.jfif", "img31.jfif"],
+        answer: "Ekadashi vrat"
+    },
+    {
+        images: ["img33.jfif", "img34.jfif", "img35.jfif"],
+        answer: "Bahya lakshanam(tulasi mala, gopi chandan)"
+    },
+    {
+        images: ["img37.jpg", "img38.jpg", "img39.jpg"],
+        answer: "Alandi"
+    },
+    {
+        images: ["img41.jfif", "img42.jfif", "img43.jfif"],
+        answer: "Harihara Abheda"
+    },
+    {
+        images: ["img45.jfif", "img46.jfif", "img47.jfif"],
+        answer: "Mathru Pithru Bhakthi"
+    }
+];
+
+let currentQuestion = 0;
+let revealIndex = 0;
+
+function loadQuestion() {
+    document.getElementById("answer").style.display = "none";
+    document.getElementById("answer").innerText = "";
+
+    const q = questions[currentQuestion];
+
+    for (let i = 0; i < 4; i++) {
+        let img = document.getElementById("img" + i);
+        img.style.display = "none";
+        img.src = q.images[i];
+    }
+
+    revealIndex = 0;
+
+    let round = Math.floor(currentQuestion / 3) + 1;
+    let team = teams[currentQuestion % 3];
+
+    document.getElementById("roundText").innerText = "Round " + round;
+    document.getElementById("teamText").innerText = "Team: " + team;
+}
+
+function revealImage() {
+    if (revealIndex < 4) {
+        document.getElementById("img" + revealIndex).style.display = "block";
+        revealIndex++;
+    }
+}
+
+function showAnswer() {
+    document.getElementById("answer").innerText = questions[currentQuestion].answer;
+    document.getElementById("answer").style.display = "block";
+}
+
+function nextQuestion() {
+    currentQuestion++;
+    if (currentQuestion >= questions.length) {
+        alert("Quiz Over!");
+        currentQuestion = 0;
+    }
+    loadQuestion();
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>
